@@ -16,3 +16,14 @@ class Location(BaseModel):
 
     class Meta:
         db_table = "location"
+
+
+class GoogleAddress(BaseModel):
+    """
+    Model created to store google map address on lat long.
+    """
+    lat = models.CharField(max_length=200)
+    long = models.CharField(max_length=200)
+    place_id = models.CharField(max_length=255)
+    formatted_address = models.CharField(max_length=1000, null=True, blank=True)
+
