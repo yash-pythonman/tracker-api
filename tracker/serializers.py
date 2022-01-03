@@ -10,4 +10,4 @@ class LocationSerializer(ModelSerializer):
 
     class Meta:
         model = Location
-        fields = ("lat", "long", "time")
+        fields = ("latitude", "longitude", "currentTime")

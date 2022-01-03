@@ -8,10 +8,10 @@ class Location(BaseModel):
     """
     Model created to store organization's current location.
     """
-    lat = models.CharField(max_length=200)
-    long = models.CharField(max_length=200)
+    latitude = models.CharField(max_length=200)
+    longitude = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_location")
-    time = models.DateTimeField(null=True, blank=True)
+    currentTime = models.DateTimeField(null=True, blank=True)
     address = models.CharField(max_length=1000, null=True, blank=True)
 
     class Meta:
@@ -22,8 +22,8 @@ class GoogleAddress(BaseModel):
     """
     Model created to store google map address on lat long.
     """
-    lat = models.CharField(max_length=200)
-    long = models.CharField(max_length=200)
+    latitude = models.CharField(max_length=200)
+    longitude = models.CharField(max_length=200)
     place_id = models.CharField(max_length=255)
     formatted_address = models.CharField(max_length=1000, null=True, blank=True)
 

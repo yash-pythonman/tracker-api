@@ -18,13 +18,13 @@ class LocationViewSet(ViewSet):
         """
         Methode create to insert location detail for a user.
         """
-        payload = LocationSerializer(data=request.data)
+        payload = LocationSerializer(data=request.data, many=True)
         if payload.is_valid(raise_exception=True):
-            data = payload.validated_data
-            address = get_address(data['lat'], data['long'])
-            data.update({"address": address})
-            location = Location.objects.create(**data, user=request.user)
-            return Response({"location_id": location.id}, status=status.HTTP_201_CREATED)
+            for data in payload.validated_data:
+                address = get_address(data['latitude'], data['longitude'])
+                data.update({"address": address})
+                Location.objects.create(**data, user=request.user)
+            return Response({"message": "Location added."}, status=status.HTTP_201_CREATED)
 
     @staticmethod
     def list(request):

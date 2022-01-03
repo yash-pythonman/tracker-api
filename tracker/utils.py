@@ -4,11 +4,11 @@ import requests
 from tracker_api.settings import API_KEY
 
 
-def get_address(lat, long):
-    address = GoogleAddress.objects.filter(lat=lat, long=long).last()
+def get_address(latitude, longitude):
+    address = GoogleAddress.objects.filter(latitude=latitude, longitude=longitude).last()
     if not address:
         URL = "https://maps.googleapis.com/maps/api/geocode/json?"
-        params = f"latlng={lat},{long}&key={API_KEY}"
+        params = f"latlng={latitude},{longitude}&key={API_KEY}"
         response = requests.get(URL + params)
         result = response.json()["results"]
         place_id = ""
@@ -18,8 +18,8 @@ def get_address(lat, long):
                 address = formatted_address
                 place_id = item.get("place_id")
         GoogleAddress.objects.create(
-            lat=lat,
-            long=long,
+            latitude=latitude,
+            longitude=longitude,
             place_id=place_id,
             formatted_address=address
         )

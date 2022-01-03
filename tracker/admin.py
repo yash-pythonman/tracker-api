@@ -4,7 +4,7 @@ from tracker.models import Location
 
 
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ("user", 'lat', 'long', 'time', 'address')
+    list_display = ("user", 'latitude', 'longitude', 'currentTime', 'address')
 
 
 admin.site.register(Location, LocationAdmin)
